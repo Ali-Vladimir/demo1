@@ -31,6 +31,7 @@ Route::get('/about', [SiteController::class, 'about']);
 */
 
 Route::get('/', [HomeLandController::class, 'index'])->name('home');
+Route::match(['get','post'],'/property_details/{property_id}', [HomeLandController::class,'property_details'])->name('property_details');
 Route::get('/property_details/{property_id}', [HomeLandController::class,'property_details'])->name('property_details');
 Route::get('/buy', [HomeLandController::class,'buy'])->name('buy');
 Route::get('/rent', [HomeLandController::class,'rent'])->name('rent');

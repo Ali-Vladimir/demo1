@@ -54,7 +54,7 @@
             <div class="row mb-5">
               <div class="col-md-6 col-lg-4 text-center border-bottom border-top py-3">
                 <span class="d-inline-block text-black mb-0 caption-text">Home Type</span>
-                <strong class="d-block">{{$property->property_listing_type_id}}</strong>
+                <strong class="d-block">{{$property->list_type->name}}</strong>
               </div>
               <div class="col-md-6 col-lg-4 text-center border-bottom border-top py-3">
                 <span class="d-inline-block text-black mb-0 caption-text">Year Built</span>
@@ -63,6 +63,10 @@
               <div class="col-md-6 col-lg-4 text-center border-bottom border-top py-3">
                 <span class="d-inline-block text-black mb-0 caption-text">Price/Sqft</span>
                 <strong class="d-block">${{ $property->getPriceBySquareFeet() }}</strong>
+              </div>
+              <div class="col-md-6 col-lg-4 text-center border-bottom border-top py-3">
+                <span class="d-inline-block text-black mb-0 caption-text">City</span>
+                <strong class="d-block">{{ $property->city->name }}</strong>
               </div>
             </div>
             <h2 class="h4 text-black">More Info</h2>
@@ -86,18 +90,36 @@
           <div class="bg-white widget border rounded">
 
             <h3 class="h4 text-black widget-title mb-3">Contact Agent</h3>
-            <form action="" class="form-contact-agent">
+                @if(session()->has('message'))    <div class="alert alert-success">
+                    {{ session()->get('message') }}
+                </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            <form action="" class="form-contact-agent" method="POST">
+                @csrf
               <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" id="name" class="form-control">
+                <input type="text" id="name" name="name"class="form-control">
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" class="form-control">
+                <input type="email" id="email" name="email"class="form-control">
               </div>
               <div class="form-group">
                 <label for="phone">Phone</label>
-                <input type="text" id="phone" class="form-control">
+                <input type="text" id="phone" name="phone"class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea type="message" id="message" name="message"class="form-control"></textarea>
               </div>
               <div class="form-group">
                 <input type="submit" id="phone" class="btn btn-primary" value="Send Message">
