@@ -3,26 +3,45 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Property;
 
 class HomeLandController extends Controller
 {
     public function index(){
-        return view('homeland.index');
+
+        $properties =Property::all();
+        return view('homeland.index', compact('properties'));
     }
-    public function about(){
-        return view('homeland.about');
+    public function property_details($property_id){
+        $property = Property::find($property_id);
+        return view('homeland.property_details', compact('property'));
     }
+
     public function contact(){
         return view('homeland.contact');
     }
-    public function login(){
-        return view('homeland.login');
-    }
+
     public function buy(){
         return view('homeland.buy');
     }
+
     public function rent(){
         return view('homeland.rent');
     }
 
+    public function about(){
+        return view('homeland.about');
+    }
+
+    public function login(){
+        return view('homeland.login');
+    }
+
+    public function register(){
+        return view('homeland.register');
+    }
+
+    public function properties(){
+        return view('homeland.properties');
+    }
 }

@@ -30,10 +30,11 @@ Route::get('/services', [SiteController::class,'services']);
 Route::get('/about', [SiteController::class, 'about']);
 */
 
-Route::get('/', [HomeLandController::class, 'index']);
-Route::get('/buy', [HomeLandController::class,'buy']);
-Route::get('/rent', [HomeLandController::class,'rent']);
-Route::get('/properties/{porperty_type_id}', [HomeLandController::class,'properties']);
-Route::get('/about', [HomeLandController::class,'about']);
-Route::get('/contact', [HomeLandController::class,'contact']);
-Route::get('/login', [HomeLandController::class,'login']);
+Route::get('/', [HomeLandController::class, 'index'])->name('home');
+Route::get('/property_details/{property_id}', [HomeLandController::class,'property_details'])->name('property_details');
+Route::get('/buy', [HomeLandController::class,'buy'])->name('buy');
+Route::get('/rent', [HomeLandController::class,'rent'])->name('rent');
+Route::get('/properties/{porperty_type_id}', [HomeLandController::class,'properties'])->name('property_listing_type');
+Route::get('/about', [HomeLandController::class,'about'])->name('about');
+Route::get('/contact', [HomeLandController::class,'contact'])->name('contact');
+Route::get('/login', [HomeLandController::class,'login'])->name('login');
