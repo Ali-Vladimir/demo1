@@ -35,10 +35,12 @@ class HomeLandController extends Controller
     }
 
     public function buy(){
+        $properties = Property::where("offer_type","For Sale");
         return view('homeland.buy');
     }
 
     public function rent(){
+        $properties = Property::where("offer_type","For Sale");
         return view('homeland.rent');
     }
 

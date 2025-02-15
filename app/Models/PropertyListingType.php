@@ -7,4 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class PropertyListingType extends Model
 {
     protected $table = 'property_listing_type';
+
+    public function properties(): HasMany{
+        return $this->hasMany(Property::class);
+    }
 }
