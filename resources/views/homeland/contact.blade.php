@@ -9,43 +9,66 @@
 
 
 
-          <form action="#" class="p-5 bg-white border">
+            <form action="" method="POST" class="p-5 bg-white border">
+                @csrf <!-- Token CSRF para protección contra ataques -->
 
-            <div class="row form-group">
-              <div class="col-md-12 mb-3 mb-md-0">
-                <label class="font-weight-bold" for="fullname">Full Name</label>
-                <input type="text" id="fullname" class="form-control" placeholder="Full Name">
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-12">
-                <label class="font-weight-bold" for="email">Email</label>
-                <input type="email" id="email" class="form-control" placeholder="Email Address">
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-12">
-                <label class="font-weight-bold" for="email">Subject</label>
-                <input type="text" id="subject" class="form-control" placeholder="Enter Subject">
-              </div>
-            </div>
+                <!-- Alertas de éxito -->
+                @if (session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
 
+                <!-- Alertas de errores de validación -->
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-            <div class="row form-group">
-              <div class="col-md-12">
-                <label class="font-weight-bold" for="message">Message</label>
-                <textarea name="message" id="message" cols="30" rows="5" class="form-control" placeholder="Say hello to us"></textarea>
-              </div>
-            </div>
+                <!-- Campo: Nombre Completo -->
+                <div class="row form-group">
+                    <div class="col-md-12 mb-3 mb-md-0">
+                        <label class="font-weight-bold" for="full_name">Full Name</label>
+                        <input type="text" id="full_name" name="full_name" class="form-control" placeholder="Full Name" value="{{ old('full_name') }}">
+                    </div>
+                </div>
 
-            <div class="row form-group">
-              <div class="col-md-12">
-                <input type="submit" value="Send Message" class="btn btn-primary  py-2 px-4 rounded-0">
-              </div>
-            </div>
+                <!-- Campo: Correo Electrónico -->
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <label class="font-weight-bold" for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Email Address" value="{{ old('email') }}">
+                    </div>
+                </div>
 
+                <!-- Campo: Asunto -->
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <label class="font-weight-bold" for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" class="form-control" placeholder="Enter Subject" value="{{ old('subject') }}">
+                    </div>
+                </div>
 
-          </form>
+                <!-- Campo: Mensaje -->
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <label class="font-weight-bold" for="message">Message</label>
+                        <textarea name="message" id="message" cols="30" rows="5" class="form-control" placeholder="Say hello to us">{{ old('message') }}</textarea>
+                    </div>
+                </div>
+
+                <!-- Botón de Envío -->
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <input type="submit" value="Send Message" class="btn btn-primary py-2 px-4 rounded-0">
+                    </div>
+                </div>
+            </form>
         </div>
 
         <div class="col-lg-4">

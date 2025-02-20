@@ -35,7 +35,7 @@ Route::match(['get','post'],'/property_details/{property_id}', [HomeLandControll
 Route::get('/property_details/{property_id}', [HomeLandController::class,'property_details'])->name('property_details');
 Route::get('/buy', [HomeLandController::class,'buy'])->name('buy');
 Route::get('/rent', [HomeLandController::class,'rent'])->name('rent');
-Route::get('/properties/{properties_listing_type}', [HomeLandController::class,'properties'])->name('property_listing_type');
-Route::get('/about', [HomeLandController::class,'about'])->name('about');
-Route::get('/contact', [HomeLandController::class,'contact'])->name('contact');
+Route::get('/properties/{property_listing_type}', [HomeLandController::class, 'properties_listing_type'])->name('property_listing_type');Route::get('/about', [HomeLandController::class,'about'])->name('about');
 Route::get('/login', [HomeLandController::class,'login'])->name('login');
+Route::get('/register', [HomeLandController::class,'register'])->name('register');
+Route::match(['get','post'],'/contact', [HomeLandController::class,'contact'])->name('contact');
