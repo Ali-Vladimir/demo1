@@ -72,6 +72,25 @@
                         <h2 class="h4 text-black">More Info</h2>
                         <p>{{ $property->description }}</p>
 
+                        <h3>Reviews:</h3>
+                        @foreach ($reviews as $review)
+                            <div class="review">
+                                <h4>{{ $review->name }} ({{ $review->rating }} stars)</h4>
+                                <p>{{ $review->description }}</p>
+                                <small>{{ $review->created_at->format('d M, Y') }}</small>
+                            </div>
+                        @endforeach
+
+                        <h3>Submit your review:</h3>
+                        <form method="POST" action="{{ route('property.storeReview', $property->id) }}">
+                            @csrf
+                            <input type="text" name="name" placeholder="Your Name" required>
+                            <input type="email" name="email" placeholder="Your Email" required>
+                            <textarea name="description" placeholder="Your Review" required></textarea>
+                            <input type="number" name="rating" min="1" max="5" placeholder="Rating (1-5)" required>
+                            <button type="submit">Submit Review</button>
+                        </form>
+
                         <div class="row no-gutters mt-5">
                             <div class="col-12">
                                 <h2 class="h4 text-black mb-3">Gallery</h2>

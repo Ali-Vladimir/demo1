@@ -9,6 +9,7 @@ use App\Models\ContactAgent;
 use App\Models\ContactAgentSubject;
 use App\Mail\ContactFormMail; // Importa la clase de correo
 use Illuminate\Support\Facades\Mail; // Importa la facade Mail
+use App\Models\Review;
 
 
 class HomeLandController extends Controller
@@ -44,8 +45,29 @@ class HomeLandController extends Controller
         $property = Property::find($property_id);
         //$property = PropertyListingType::find($property_id->property_listing_type_id);
         //dd($propertyType);
-        return view('homeland.property_details', compact('property'));
+        $reviews = $property->reviews()->latest()->get();
+        return view('homeland.property_details', compact('property','reviews'));
     }
+    public function storeReview(Request $request, $property_id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'description' => 'required|string|max:1000',
+            'rating' => 'required|integer|between:1,5',
+        ]);
+
+        $review = new Review();
+        $review->name = $request->input('name');
+        $review->email = $request->input('email');
+        $review->description = $request->input('description');
+        $review->rating = $request->input('rating');
+        $review->property_id = $property_id;
+        $review->save();
+
+        return back()->with('success', 'Your review has been submitted successfully!');
+    }
+
 
     public function contact(Request $request)
     {

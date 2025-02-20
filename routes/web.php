@@ -39,3 +39,5 @@ Route::get('/properties/{property_listing_type}', [HomeLandController::class, 'p
 Route::get('/login', [HomeLandController::class,'login'])->name('login');
 Route::get('/register', [HomeLandController::class,'register'])->name('register');
 Route::match(['get','post'],'/contact', [HomeLandController::class,'contact'])->name('contact');
+Route::post('/property/{property_id}/review', [HomeLandController::class, 'storeReview'])->name('property.storeReview');
+
