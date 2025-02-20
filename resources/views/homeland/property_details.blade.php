@@ -1,6 +1,86 @@
 @extends('layouts.homeland')
 
 @section('content')
+<style>
+    .rating {
+    font-size: 1.5rem;
+    color: #ffcc00;
+}
+
+.star {
+    font-size: 1.5rem;
+    margin-right: 2px;
+}
+
+.star.filled {
+    color: #ffcc00;
+}
+
+.star.empty {
+    color: #e0e0e0;
+}
+form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="text"], input[type="email"], textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 1rem;
+    }
+
+    textarea {
+        height: 150px;
+        resize: vertical;
+    }
+
+    input[type="number"] {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+
+    button[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    h3, h4 {
+        margin-bottom: 15px;
+        font-family: Arial, sans-serif;
+        color: #333;
+    }
+
+    .review {
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: #f4f4f4;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+</style>
     <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url(images/hero_bg_2.jpg);"
         data-aos="fade" data-stellar-background-ratio="0.5">
         <div class="container">
@@ -75,7 +155,19 @@
                         <h3>Reviews:</h3>
                         @foreach ($reviews as $review)
                             <div class="review">
-                                <h4>{{ $review->name }} ({{ $review->rating }} stars)</h4>
+                                <h4>{{ $review->name }}
+                                    @php
+                                        $fullStars = floor($review->rating); // Estrellas llenas
+                                        $emptyStars = 5 - $fullStars; // Estrellas vacías
+                                    @endphp
+
+                                    @for ($i = 0; $i < $fullStars; $i++)
+                                        <span class="star filled">★</span> <!-- Estrella llena -->
+                                    @endfor
+                                    @for ($i = 0; $i < $emptyStars; $i++)
+                                        <span class="star empty">☆</span> <!-- Estrella vacía -->
+                                    @endfor
+                                </h4>
                                 <p>{{ $review->description }}</p>
                                 <small>{{ $review->created_at->format('d M, Y') }}</small>
                             </div>
