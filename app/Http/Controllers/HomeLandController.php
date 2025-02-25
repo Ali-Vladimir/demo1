@@ -7,8 +7,8 @@ use App\Models\Property;
 use App\Models\PropertyListingType;
 use App\Models\ContactAgent;
 use App\Models\ContactAgentSubject;
-use App\Mail\ContactFormMail; // Importa la clase de correo
-use Illuminate\Support\Facades\Mail; // Importa la facade Mail
+use App\Mail\ContactFormMail;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Review;
 
 
@@ -71,9 +71,7 @@ class HomeLandController extends Controller
 
     public function contact(Request $request)
     {
-        // Si el método es POST, procesar el formulario
         if ($request->isMethod("POST")) {
-            // Validar los datos del formulario
             $request->validate([
                 'full_name' => 'required|string|max:255',
                 'email' => 'required|email|max:50',
@@ -87,7 +85,6 @@ class HomeLandController extends Controller
                 'message.required' => 'The message field is required.',
             ]);
 
-            // Guardar los datos en la base de datos
             $contact = new ContactAgentSubject();
             $contact->full_name = $request->input("full_name");
             $contact->email = $request->input("email");
@@ -95,7 +92,6 @@ class HomeLandController extends Controller
             $contact->message = $request->input("message");
             $contact->save();
 
-            // Enviar correo electrónico al administrador
             Mail::to('21030246@itcelaya.edu.mx')->send(new ContactFormMail(
                 $request->input("full_name"),
                 $request->input("email"),
@@ -103,11 +99,9 @@ class HomeLandController extends Controller
                 $request->input("message")
             ));
 
-            // Mostrar un mensaje de éxito
             session()->now("success", "Your message has been sent successfully!");
         }
 
-        // Retornar la vista de contacto
         return view('homeland.contact');
     }
 

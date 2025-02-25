@@ -10,11 +10,10 @@ class ContactFormMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    // Datos del formulario
     public $full_name;
     public $email;
     public $subject;
-    public $user_message; // Cambié $message para evitar conflicto
+    public $user_message;
 
     /**
      * Create a new message instance.
@@ -26,7 +25,7 @@ class ContactFormMail extends Mailable
         $this->full_name = $full_name;
         $this->email = $email;
         $this->subject = $subject;
-        $this->user_message = $message; // Se renombró aquí
+        $this->user_message = $message;
     }
 
     /**
@@ -36,7 +35,7 @@ class ContactFormMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Nuevo mensaje de contacto') // Asunto del correo
-                    ->view('emails.contact_form'); // Vista del correo
+        return $this->subject('Nuevo mensaje de contacto')
+                    ->view('emails.contact_form');
     }
 }

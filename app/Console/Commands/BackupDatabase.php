@@ -18,9 +18,9 @@ class BackupDatabase extends Command
 
     public function handle()
     {
-        $dbName = env('DB_DATABASE');  // Correcto
-        $dbUser = env('DB_USERNAME');  // Correcto
-        $dbPassword = env('DB_PASSWORD');  // Correcto
+        $dbName = env('DB_DATABASE');
+        $dbUser = env('DB_USERNAME');
+        $dbPassword = env('DB_PASSWORD');
         $dbPort = env('DB_PORT', 5432);
         $backupPath = storage_path('app/backups/');
 

@@ -18,9 +18,6 @@ class Review extends Model
         'rating',
     ];
 
-    /**
-     * Relación: Una reseña pertenece a una propiedad.
-     */
     public function property(): BelongsTo
     {
         return $this->belongsTo(Property::class);
