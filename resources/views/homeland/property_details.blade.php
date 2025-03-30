@@ -225,7 +225,11 @@ form {
                                 </ul>
                             </div>
                         @endif
-                        <form action="" class="form-contact-agent" method="POST">
+                        <div id="successAlert" class="alert alert-success d-none">
+                            Conctact agent message sent successfully
+                        </div>
+                        <form action="" class="form-contact-agent" method="POST" id="formContactAgent">
+                            <input type="hidden" id="porperty_id" name="property_id" value="{{ $property->id }}">
                             @csrf
                             <div class="form-group">
                                 <label for="name">Name</label>
@@ -246,7 +250,7 @@ form {
                                 </textarea>
                             </div>
                             <div class="form-group">
-                                <input type="submit" id="phone" class="btn btn-primary" value="Send Message">
+                                <input type="submit" id="btnSendContactAgentMessage" class="btn btn-primary" value="Send Message">
                             </div>
                         </form>
                     </div>

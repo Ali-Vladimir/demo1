@@ -19,10 +19,10 @@
     <link rel="stylesheet" href="{{ asset('fonts/flaticon/font/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('css/fl-bigmug-line.css') }}">
 
-
     <link rel="stylesheet" href="{{ asset('css/aos.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
 
   </head>
   <body>
@@ -192,7 +192,9 @@
   <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
   <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
   <script src="{{ asset('js/aos.js') }}"></script>
+  <script src="//cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
   <script src="{{ asset('js/main.js') }}"></script>
-
+  <script src="{{ asset('js/homeland.js') }}"></script>
+  <script src="https"
   </body>
 </html>

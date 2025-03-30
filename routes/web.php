@@ -3,6 +3,7 @@ use App\Http\Controllers\HomeLandController;
 //use App\Http\Controllers;
 use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmployeesController;
 
 /*
 Route::get('/', function () {
@@ -40,4 +41,6 @@ Route::get('/login', [HomeLandController::class,'login'])->name('login');
 Route::get('/register', [HomeLandController::class,'register'])->name('register');
 Route::match(['get','post'],'/contact', [HomeLandController::class,'contact'])->name('contact');
 Route::post('/property/{property_id}/review', [HomeLandController::class, 'storeReview'])->name('property.storeReview');
-
+Route::get('/amdin/properties',[AdminPropertiesController::class,'index'])->name('admin.properties.index');
+Route::get('/admin/employees', [EmployeesController::class, 'index'])->name('employees.index');
+Route::get('/admin/employees_fetch', [EmployeesController::class, 'employees_fetch'])->name('admin.employees.employee_fetch');
